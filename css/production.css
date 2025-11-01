@@ -1,0 +1,165 @@
+/* Production-level CSS enhancements */
+
+/* Performance optimizations */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #2c5aa0, #1e3799);
+  color: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus management */
+*:focus {
+  outline: 2px solid #60a3bc;
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus {
+  outline: 3px solid #82ccdd;
+  outline-offset: 3px;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: wait;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #60a3bc;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Progress indicator */
+.progress-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 25px;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.progress-fill {
+  height: 4px;
+  background: linear-gradient(90deg, #60a3bc, #82ccdd);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  margin-bottom: 5px;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: #fff;
+  text-align: center;
+  display: block;
+}
+
+/* Enhanced envelope interactions */
+.envelope {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.envelope:focus {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.3), 0 0 0 3px #82ccdd;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .envelope:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  body {
+    background: #000;
+    color: #fff;
+  }
+  
+  .envelope {
+    border: 3px solid #fff;
+    background: #333;
+  }
+  
+  .envelope-seal {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .envelope {
+    break-inside: avoid;
+    border: 1px solid black;
+    background: white;
+  }
+  
+  #music-toggle,
+  .progress-bar {
+    display: none;
+  }
+}

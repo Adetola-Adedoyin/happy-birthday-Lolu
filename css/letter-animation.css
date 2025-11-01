@@ -1,0 +1,241 @@
+/* Handwritten font for romantic feel */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap');
+
+/* Envelope Container */
+.envelope {
+  width: 280px;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+  justify-self: center;
+  perspective: 1000px;
+}
+
+/* Envelope Body */
+.envelope-body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #f4f1e8, #e8e2d4);
+  border: 2px solid #d4c5a9;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+  overflow: visible;
+}
+
+.envelope:hover .envelope-body {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Envelope Flap */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(145deg, #f8f5f0, #ede7d9);
+  border: 2px solid #d4c5a9;
+  border-bottom: none;
+  transform-origin: top center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* Wax Seal */
+.wax-seal {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  background: radial-gradient(circle, #8B0000, #DC143C);
+  border-radius: 50%;
+  z-index: 4;
+  transition: all 0.6s ease;
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.wax-seal::before {
+  content: "💌";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+/* Letter Paper */
+.paper-letter {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  background: linear-gradient(145deg, #fefefe, #f9f9f9);
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  transform: translateY(20px) scaleY(0.3);
+  opacity: 0;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: none;
+}
+
+/* Paper texture */
+.paper-letter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 22px,
+      rgba(0,0,0,0.03) 23px
+    );
+  pointer-events: none;
+}
+
+/* Letter Content */
+.paper-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2c3e50;
+  opacity: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Animation States */
+.envelope.step-1 .envelope-flap {
+  transform: rotateX(-180deg);
+}
+
+.envelope.step-1 .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0) rotate(180deg);
+}
+
+.envelope.step-2 .paper-letter {
+  transform: translateY(-50px) scaleY(0.8);
+  opacity: 0.8;
+  z-index: 5;
+}
+
+.envelope.step-3 .paper-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0.9;
+  z-index: 1000;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.envelope.step-4 .paper-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  max-width: 600px;
+  height: 80vh;
+  max-height: 500px;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 1000;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+.envelope.step-4 .paper-content {
+  opacity: 1;
+  font-size: 20px;
+}
+
+/* Close button */
+.paper-letter::after {
+  content: "✕";
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.envelope.step-4 .paper-letter::after {
+  opacity: 1;
+}
+
+.paper-letter::after:hover {
+  color: #666;
+}
+
+/* Romantic sparkles */
+.sparkles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ff69b4;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% { 
+    opacity: 0; 
+    transform: translateY(0) scale(0);
+  }
+  50% { 
+    opacity: 1; 
+    transform: translateY(-100px) scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .envelope.step-4 .paper-letter {
+    width: 95vw;
+    height: 85vh;
+  }
+  
+  .envelope.step-4 .paper-content {
+    font-size: 18px;
+    padding: 15px;
+  }
+}

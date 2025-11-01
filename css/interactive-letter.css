@@ -1,0 +1,341 @@
+/* Handwritten fonts for romantic feel */
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+/* Envelope Container */
+.envelope {
+  width: 280px;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+  justify-self: center;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+}
+
+/* Envelope Body */
+.envelope-body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #f4f1e8, #e8e2d4);
+  border: 2px solid #d4c5a9;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  overflow: visible;
+}
+
+/* Envelope Flap */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(145deg, #f8f5f0, #ede7d9);
+  border: 2px solid #d4c5a9;
+  border-bottom: none;
+  transform-origin: top center;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.envelope.opening .envelope-flap {
+  transform: rotateX(-180deg);
+}
+
+/* Wax Seal */
+.wax-seal {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  background: radial-gradient(circle, #8B0000, #DC143C);
+  border-radius: 50%;
+  z-index: 4;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+}
+
+.wax-seal::before {
+  content: "💌";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+.envelope.opening .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0) rotate(180deg);
+}
+
+/* Letter Paper - starts folded inside */
+.paper-letter {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  width: 70%;
+  height: 50%;
+  background: linear-gradient(145deg, #fefefe, #f9f9f9);
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  transform: translateY(20px) scaleY(0.4) rotateX(15deg);
+  opacity: 0;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Paper texture */
+.paper-letter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 22px,
+      rgba(0,0,0,0.03) 23px
+    );
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+/* Animation Step 1: Letter slides out */
+.envelope.slide-out .paper-letter {
+  transform: translateY(-60px) scaleY(0.6) rotateX(10deg);
+  opacity: 0.8;
+  z-index: 5;
+}
+
+/* Animation Step 2: Letter moves to center and starts unfolding */
+.envelope.unfold-1 .paper-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 200px;
+  transform: translate(-50%, -50%) scaleY(0.8) rotateX(5deg);
+  opacity: 0.9;
+  z-index: 1000;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Animation Step 3: Letter continues unfolding */
+.envelope.unfold-2 .paper-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 350px;
+  transform: translate(-50%, -50%) scaleY(0.95) rotateX(2deg);
+  opacity: 0.95;
+  z-index: 1000;
+  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+}
+
+/* Animation Step 4: Letter fully expanded and readable */
+.envelope.fully-open .paper-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 85vw;
+  max-width: 700px;
+  height: 85vh;
+  max-height: 600px;
+  transform: translate(-50%, -50%) scaleY(1) rotateX(0deg);
+  opacity: 1;
+  z-index: 1000;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  overflow-y: auto;
+}
+
+/* Letter Content */
+.paper-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  font-family: 'Kalam', cursive;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #2c3e50;
+  opacity: 0;
+  overflow-y: auto;
+  transition: opacity 0.8s ease 0.5s;
+}
+
+.envelope.fully-open .paper-content {
+  opacity: 1;
+}
+
+/* Typewriter effect for text */
+.paper-content.typewriter p {
+  overflow: hidden;
+  border-right: 2px solid #2c3e50;
+  white-space: nowrap;
+  margin: 0;
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #2c3e50; }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: 35px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #666;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.envelope.fully-open .close-btn {
+  opacity: 1;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  color: #333;
+  transform: scale(1.1);
+}
+
+/* Romantic background effects */
+.romantic-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.envelope.fully-open ~ .romantic-bg {
+  opacity: 1;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 182, 193, 0.7);
+  animation: floatUp 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) rotate(360deg);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffd700;
+  border-radius: 50%;
+  animation: sparkleFloat 4s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% { 
+    opacity: 0; 
+    transform: scale(0);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+}
+
+/* Backdrop overlay */
+.letter-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.envelope.fully-open .letter-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .envelope.fully-open .paper-letter {
+    width: 95vw;
+    height: 90vh;
+  }
+  
+  .paper-content {
+    padding: 20px;
+    font-size: 16px;
+  }
+  
+  .close-btn {
+    top: 10px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .paper-content {
+    padding: 15px;
+    font-size: 14px;
+  }
+}

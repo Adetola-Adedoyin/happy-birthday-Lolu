@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Surprise ❤️</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/interactive-letter.css?v=1">
+  <link rel="stylesheet" href="css/final.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="final-page">
+  <button id="music-toggle">
+    <span>🔊</span>
+  </button>
+  <audio id="bg-music" src="audio/mirrors.mp3" loop></audio>
+
+  <div class="final-container">
+    <div class="envelope final-envelope">
+      <div class="envelope-body">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal"></div>
+        <div class="paper-letter">
+          <div class="paper-content">
+            <p>Happy wedding anniversary my love, 7 years with you has been amazingly awesome, a roller coaster of emotions, tears, laughter, learning and everyday waking up to choose you again and again. In the words of a devops engineer, you are the ansible to my terraform structure.</p>
+            <p>From the moment I met you, I knew you were special. Your kindness, intelligence, and beauty captivated me. Thank you for always protecting me the way i try to protect everyone else, just that you should also be willing to be protected too, thank you for making it safe for me to fall apart so i can rebuild. Every day with you has been a blessing, and I am grateful for every moment of you.</p>
+            <p>As we celebrate this special day of your birth, I want you to know how much I love you. You are my rock, my confidant, and my best friend (You booted Nathaniel). I look forward to many more years of happiness, to you sweetie pie.</p>
+            <p>Thank you for being you, keep being you, for loving me, and for making my life worth living.</p>
+            <p>With all my love, </p>  
+            <p>💕 Forever Yours 💕</p>
+            <p>Your Genie💕</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-hearts"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const envelope = document.querySelector('.final-envelope');
+      const letterParagraphs = envelope.querySelectorAll('.paper-content p');
+      const letterText = Array.from(letterParagraphs).map(p => p.textContent).join(' ');
+      
+      envelope.addEventListener('click', () => {
+        openFinalLetter(envelope, letterText);
+      });
+    });
+    
+    function openFinalLetter(envelope, text) {
+      envelope.classList.add('opened');
+      
+      const modal = document.createElement('div');
+      modal.className = 'letter-modal';
+      modal.style.display = 'flex';
+      
+      const paperContent = envelope.querySelector('.paper-content').innerHTML;
+      
+      modal.innerHTML = `
+        <div class="letter-paper">
+          <div class="letter-close">✕</div>
+          <div class="letter-text final-letter-text">
+            <div>
+              ${paperContent}
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      const closeModal = () => {
+        modal.remove();
+        // Show final surprise after closing the final letter
+        setTimeout(() => {
+          const surpriseModal = document.createElement('div');
+          surpriseModal.className = 'letter-modal';
+          surpriseModal.style.display = 'flex';
+          surpriseModal.innerHTML = `
+            <div class="letter-paper">
+              <div class="letter-text">
+                <div style="text-align: center;">
+                  <h2 style="color: #8B0000; margin-bottom: 20px;">🎉 Abike mi 🎉</h2>
+                  <p style="font-size: 20px; margin-bottom: 20px;">You've opened your heart to all my words...</p>
+                  <p style="font-size: 18px; margin-bottom: 30px;">Every letter was written with all the love I have for you. Thank you for taking this journey with me.</p>
+                  <p style="font-size: 24px; color: #8B0000;">💕 Happy Birthday, Pearl 💕</p>
+                </div>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(surpriseModal);
+          
+          surpriseModal.addEventListener('click', () => {
+            surpriseModal.remove();
+          });
+        }, 3000);
+      };
+      
+      modal.querySelector('.letter-close').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+  </script>
+  <script src="js/persistent-audio.js"></script>
+</body>
+</html>

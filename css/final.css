@@ -1,0 +1,88 @@
+/* Final page specific styles */
+@font-face {
+  font-family: 'Handwriting';
+  src: url('../fonts/handwriting.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.final-page {
+  background: linear-gradient(135deg, #0f3460, #16537e);
+  overflow: hidden;
+}
+
+.final-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.handwritten-note {
+  background: rgba(248, 249, 250, 0.95);
+  color: #2c3e50;
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  max-width: 600px;
+  text-align: center;
+  font-family: 'Handwriting', cursive;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  transform: scale(0);
+  animation: noteAppear 1s ease-out 0.5s forwards;
+}
+
+@keyframes noteAppear {
+  to {
+    transform: scale(1);
+  }
+}
+
+.handwritten-note p {
+  margin-bottom: 0.5rem;
+}
+
+/* Floating Hearts Container */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Heart Styles */
+.heart {
+  position: absolute;
+  font-size: 1.2rem;
+  color: #ff6b9d;
+  opacity: 0.8;
+  animation: floatUp 6s linear infinite;
+}
+
+.heart:nth-child(2n) {
+  color: #ff8fab;
+  font-size: 1rem;
+  animation-duration: 8s;
+}
+
+.heart:nth-child(3n) {
+  color: #ffa8cc;
+  font-size: 1.4rem;
+  animation-duration: 7s;
+}
+
+/* Sparkles for final page */
+.final-sparkle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  animation: sparkle 3s ease-in-out infinite;
+  pointer-events: none;
+}

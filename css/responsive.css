@@ -1,0 +1,74 @@
+/* Mobile Responsive Styles */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 1rem;
+  }
+  
+  .hero-photo {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .intro-text {
+    font-size: 1rem;
+  }
+  
+  .letters-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+  
+  .envelope {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+  }
+  
+  .handwritten-note {
+    padding: 2rem;
+    font-size: 1.1rem;
+    margin: 1rem;
+  }
+  
+  #music-toggle {
+    width: 45px;
+    height: 45px;
+    top: 15px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .intro-text {
+    font-size: 0.9rem;
+  }
+  
+  .cta-button {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+  
+  .envelope {
+    height: 160px;
+  }
+  
+  .letter {
+    font-size: 0.85rem;
+    padding: 1rem;
+  }
+  
+  .handwritten-note {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+}

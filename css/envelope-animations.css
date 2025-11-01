@@ -1,0 +1,327 @@
+/* Handwriting font */
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+/* Realistic Envelope Styles */
+.envelope {
+  width: 280px;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+  justify-self: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.envelope-body {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #f4f1e8, #e8e2d4);
+  border: 1px solid #d4c5a9;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.envelope:hover .envelope-body {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Envelope flap */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(145deg, #f8f5f0, #ede7d9);
+  border: 1px solid #d4c5a9;
+  border-bottom: none;
+  transform-origin: top center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.envelope.opening .envelope-flap {
+  transform: rotateX(-180deg);
+}
+
+/* Wax seal */
+.wax-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #8B0000, #DC143C);
+  border-radius: 50%;
+  z-index: 4;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.wax-seal::before {
+  content: "💌";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: white;
+}
+
+.envelope.opening .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* Paper letter inside envelope */
+.paper-letter {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  width: calc(100% - 40px);
+  height: 100px;
+  background: linear-gradient(145deg, #fefefe, #f9f9f9);
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  transform: translateY(20px) scaleY(0.5);
+  opacity: 0;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Paper sliding out animation */
+.envelope.opening .paper-letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  max-width: 600px;
+  height: 80vh;
+  max-height: 500px;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 1000;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  pointer-events: auto;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Paper content */
+.paper-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #2c3e50;
+  opacity: 0;
+  overflow-y: auto;
+  display: block;
+  text-align: left;
+  transition: opacity 0.5s ease 0.5s;
+}
+
+.envelope.opening .paper-content {
+  opacity: 1;
+}
+
+.paper-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* Close button for letter */
+.paper-letter::after {
+  content: "✕";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.8s;
+}
+
+.envelope.opening .paper-letter::after {
+  opacity: 1;
+}
+
+/* Paper texture and fold lines */
+.paper-letter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(0,0,0,0.05) 25px
+    ),
+    linear-gradient(
+      90deg,
+      transparent 32%,
+      rgba(0,0,0,0.1) 33%,
+      rgba(0,0,0,0.1) 34%,
+      transparent 35%,
+      transparent 65%,
+      rgba(0,0,0,0.1) 66%,
+      rgba(0,0,0,0.1) 67%,
+      transparent 68%
+    );
+  pointer-events: none;
+  opacity: 0.3;
+  transition: opacity 0.5s ease 1s;
+}
+
+.envelope.opening .paper-letter::before {
+  opacity: 0.1;
+}
+
+/* Final envelope special styling */
+.final-envelope {
+  width: 320px;
+  height: 220px;
+}
+
+.final-envelope .envelope-body {
+  background: linear-gradient(145deg, #2c1810, #1a0f08);
+  border: 2px solid #8B4513;
+}
+
+.final-envelope .wax-seal {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #8B0000, #DC143C, #B22222);
+  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.6);
+}
+
+.final-envelope .wax-seal::before {
+  content: "💍";
+  font-size: 24px;
+}
+
+.final-envelope .wax-seal::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgba(220, 20, 60, 0.3);
+  border-radius: 50%;
+  animation: sealGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes sealGlow {
+  0% { box-shadow: 0 0 5px rgba(220, 20, 60, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(220, 20, 60, 0.8); }
+}
+
+/* Seal breaking animation */
+.final-envelope.breaking .wax-seal {
+  animation: sealBreak 0.8s ease-out forwards;
+}
+
+@keyframes sealBreak {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  25% { transform: translate(-50%, -50%) scale(1.1) rotate(-5deg); }
+  50% { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); }
+  75% { transform: translate(-50%, -50%) scale(0.8) rotate(-10deg); }
+  100% { 
+    transform: translate(-50%, -50%) scale(0) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Crack effect */
+.seal-crack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.seal-crack::before,
+.seal-crack::after {
+  content: "";
+  position: absolute;
+  background: #333;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.seal-crack::before {
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%) rotate(15deg);
+}
+
+.seal-crack::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform: translateY(-50%) rotate(-25deg);
+}
+
+.final-envelope.cracking .seal-crack::before,
+.final-envelope.cracking .seal-crack::after {
+  opacity: 1;
+}
+
+/* Enhanced paper for final letter */
+.final-paper {
+  background: linear-gradient(145deg, #faf8f5, #f5f2ed);
+  border: 2px solid #d4af37;
+}
+
+.final-content {
+  font-family: 'Kalam', cursive;
+  font-size: 18px;
+  font-weight: 400;
+  color: #2c1810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.final-message {
+  max-width: 90%;
+}
+
+.final-message p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.signature {
+  font-size: 24px !important;
+  color: #8B0000 !important;
+  font-weight: 600;
+  margin-top: 2rem !important;
+}

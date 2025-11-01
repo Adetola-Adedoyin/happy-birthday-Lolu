@@ -1,0 +1,107 @@
+/* Floating Hearts Animation */
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+.floating-heart {
+  position: fixed;
+  font-size: 1.5rem;
+  color: #ff6b9d;
+  animation: floatUp 4s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Sparkle Animation */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Envelope Open Animation */
+@keyframes envelopeOpen {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(-15deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+.envelope.opening {
+  animation: envelopeOpen 0.6s ease-in-out;
+}
+
+/* Letter Slide Animation */
+@keyframes letterSlide {
+  from {
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.letter.sliding {
+  animation: letterSlide 0.5s ease-out;
+}
+
+/* Pulse Animation for CTA Button */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(96, 163, 188, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(96, 163, 188, 0.6);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(96, 163, 188, 0.3);
+  }
+}
+
+.cta-button {
+  animation: pulse 2s ease-in-out infinite;
+}
